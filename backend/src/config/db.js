@@ -3,7 +3,8 @@ const fs = require('fs');
 const Database = require('better-sqlite3');
 const { dbPath } = require('./env');
 
-const resolvedPath = path.isAbsolute(dbPath) ? dbPath : path.join(__dirname, '..', '..', dbPath);
+const targetDbPath = process.env.VERCEL ? '/tmp/wishlist.db' : dbPath;
+const resolvedPath = path.isAbsolute(targetDbPath) ? targetDbPath : path.join(__dirname, '..', '..', targetDbPath);
 const dir = path.dirname(resolvedPath);
 if (!fs.existsSync(dir)) {
   fs.mkdirSync(dir, { recursive: true });
