@@ -40,16 +40,19 @@ const apiInfo = (req, res) =>
   });
 
 app.get('/api', apiInfo);
+app.get('/health', (req, res) => res.json({ status: 'ok', uptime: process.uptime() }));
 app.get('/api/health', (req, res) => res.json({ status: 'ok', uptime: process.uptime() }));
 
 app.use('/api', moviesRoutes);
 app.use('/api', wishlistRoutes);
+app.use('/', moviesRoutes);
+app.use('/', wishlistRoutes);
 
 const frontendDistPath = path.join(__dirname, '..', '..', 'frontend', 'dist');
 if (fs.existsSync(frontendDistPath)) {
   app.use(express.static(frontendDistPath));
   app.get('*', (req, res, next) => {
-    if (req.path.startsWith('/api')) return next();
+    if (req.path.startsWith('/api') || req.path.startsWith('/health')) return next();
     res.sendFile(path.join(frontendDistPath, 'index.html'));
   });
 } else {
