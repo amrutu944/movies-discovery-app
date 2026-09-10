@@ -22,6 +22,24 @@ app.use(
 app.use(express.json({ limit: '100kb' }));
 app.use('/api', apiLimiter);
 
+const apiInfo = (req, res) =>
+  res.json({
+    name: 'Reel — Movie Discovery API',
+    status: 'online',
+    uptime: process.uptime(),
+    health: '/api/health',
+    endpoints: [
+      '/api/health',
+      '/api/genres',
+      '/api/movies/trending',
+      '/api/movies/discover',
+      '/api/movies/search?q={query}',
+      '/api/movies/{id}',
+      '/api/wishlist',
+    ],
+  });
+
+app.get('/api', apiInfo);
 app.get('/api/health', (req, res) => res.json({ status: 'ok', uptime: process.uptime() }));
 
 app.use('/api', moviesRoutes);
@@ -35,6 +53,7 @@ if (fs.existsSync(frontendDistPath)) {
     res.sendFile(path.join(frontendDistPath, 'index.html'));
   });
 } else {
+  app.get('/', apiInfo);
   app.use(notFound);
 }
 
