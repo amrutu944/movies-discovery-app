@@ -1,8 +1,16 @@
 # Reel — Movie Discovery App
 
-A full-stack movie discovery app built with **React + Node.js**, backed by **The Movie Database (TMDB)** API.
+A full-stack movie discovery app built with **React + Node.js**, backed by **The Movie Database (TMDB)** API with resilient fallback capabilities.
 
 Browse trending and popular movies, filter by genre/year, sort results, search by title, open a movie for full details (cast, trailer, similar titles), and save movies to a wishlist that persists across sessions.
+
+---
+
+## 🚀 Live Deployment Links
+
+- **Frontend (Vercel)**: [https://movies-discovery-app.vercel.app](https://movies-discovery-app.vercel.app)
+- **Backend API (Render)**: [https://movies-discovery-backend.onrender.com/api](https://movies-discovery-backend.onrender.com/api)
+- **GitHub Repository**: [https://github.com/amrutu944/movies-discovery-app](https://github.com/amrutu944/movies-discovery-app)
 
 ---
 
